@@ -1,5 +1,6 @@
 package spring.first.steps.config;  
   
+import spring.first.steps.services.NameService;
 import org.springframework.context.annotation.Bean;  
 import org.springframework.context.annotation.ComponentScan;  
 import org.springframework.context.annotation.Configuration;  
@@ -17,11 +18,17 @@ public class Config extends WebMvcConfigurerAdapter {
     @Bean  
     public UrlBasedViewResolver setupViewResolver() {  
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();  
-        resolver.setPrefix("/WEB-INF/jsp/");  
-        resolver.setSuffix(".jsp");  
-        resolver.setViewClass(JstlView.class);  
+        resolver.setPrefix("/WEB-INF/jsp/default/");  
+        resolver.setSuffix(".jsp");
+//        resolver.getAttributesMap().put("name.bean", "dfd");
+        resolver.setViewClass(JstlView.class);
         return resolver;  
-    }  
+    }
+    
+    @Bean
+    public NameService nameBean() {
+        return new NameService();
+    }
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -8,6 +8,7 @@ package spring.first.steps.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
@@ -17,10 +18,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DefaultController {
     
+   @RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
+   public String helloAction(
+           @PathVariable( "name" ) String name,
+           ModelMap map
+   ) {
+       map.put("msg", "Hello " + name);
+       return "hello";
+   }
+   
    @RequestMapping(value = "/", method = RequestMethod.GET)
    public String index(ModelMap map) {
        map.put("msg", "Hello Spring 4 Web MVC!");
-       return "index";
+       return "default";
    }
+   
     
 }
